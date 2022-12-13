@@ -1,4 +1,4 @@
-import * as vaccineService from "../service/vaccineService.js";
+import * as vaccineService from "../services/vaccineService.js";
 
 /**
  *

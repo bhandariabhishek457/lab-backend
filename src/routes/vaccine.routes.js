@@ -6,7 +6,7 @@ import {
 	updateVaccine,
 	deleteVaccine,
 } from "../controllers/Vaccine.js";
-import { validateVaccineData } from "../middleware/validateVaccineData.js";
+import { validateVaccineData } from "../middlewares/validateVaccineData.js";
 
 const vaccineRouter = express.Router();
 

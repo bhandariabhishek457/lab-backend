@@ -1,7 +1,7 @@
 import express from "express";
 import loginRouter from "./login.routes.js";
 import vaccineRouter from "./vaccine.routes.js";
-import { verifyToken } from "../middleware/VerifyToken.js";
+import { verifyToken } from "../middlewares/VerifyToken.js";
 
 const router = express.Router();
 
