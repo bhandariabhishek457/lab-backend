@@ -1,8 +1,8 @@
 import { expect } from "chai";
-import * as userService from "../../src/services/loginService.js";
+import * as loginService from "../../src/services/loginService.js";
 
 const userData = {
-	email: "test@gmail.com",
+	email: "tezzzzsssssst@gmail.com",
 	password: "test123",
 	confPassword: "test123",
 };
@@ -12,10 +12,10 @@ const refreshToken = "sdfasdfadfaken2383fnbsdf";
 /**
  * login service test'.
  */
-describe("Auth Test", () => {
+describe("Auth Unit Test", () => {
 	var userId = "";
 	it("should create new user", async () => {
-		const user = await userService.createUser(
+		const user = await loginService.createUser(
 			userData.email,
 			userData.password
 		);
@@ -26,12 +26,12 @@ describe("Auth Test", () => {
 	});
 
 	it("should find a user with email id", async () => {
-		const user = await userService.findAllUserByEmailID(userData.email);
+		const user = await loginService.findAllUserByEmailID(userData.email);
 		expect(user[0].email).to.equal(userData.email);
 	});
 
 	it("update refresh token for user ", async () => {
-		const user = await userService.updateRefreshTokenForUserID(
+		const user = await loginService.updateRefreshTokenForUserID(
 			userId,
 			refreshToken
 		);
@@ -39,7 +39,7 @@ describe("Auth Test", () => {
 	});
 
 	it("find user by refresh token ", async () => {
-		const user = await userService.findUserByRefreshToken(refreshToken);
+		const user = await loginService.findUserByRefreshToken(refreshToken);
 
 		expect(user.refresh_token).to.equal(refreshToken);
 	});

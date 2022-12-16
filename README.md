@@ -10,9 +10,14 @@ Set the port where you want to run this application
 port = 5000
 ```
 
-Set the properties in .env file according to your values for database: for example
+Set the properties in .env file according to your values : for example
 
 ```
+ACCESS_TOKEN_SECRET =
+REFRESH_TOKEN_SECRET =
+
+TEST_TOKEN=
+
 DB = lab1
 USR_NAME = postgres
 PASSWORD = test123

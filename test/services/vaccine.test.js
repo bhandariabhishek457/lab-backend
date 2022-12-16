@@ -22,7 +22,7 @@ const vaccineDataUpdate = {
 	},
 };
 
-describe("Testing create vaccine", () => {
+describe("Testing vaccine Unit test", () => {
 	var vaccineId = "";
 	it("create vaccine ", async () => {
 		const vaccine = await vaccineService.createVaccine(vaccineData);
