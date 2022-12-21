@@ -16,6 +16,8 @@ app.use(router);
 
 const port = process.env.port || 5000;
 
-app.listen(port, () => console.log("Server running at port " + port));
+if (process.env.NODE_ENV !== "test") {
+	app.listen(port, () => console.log("Server running at port " + port));
+}
 
 export default app;

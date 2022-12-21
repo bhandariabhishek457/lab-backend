@@ -10,7 +10,7 @@ const url = "";
 const token = process.env.TEST_TOKEN;
 
 const userData = {
-	email: "tet@gmail.com",
+	email: "test@gmail.com",
 	password: "test123",
 	confPassword: "test123",
 };
@@ -19,13 +19,10 @@ const userData = {
  * Tests for register and login'.
  */
 describe("Auth Test", () => {
-	// it("should create new user", async () => {
-	// 	const res = await request(app).post(`${url}/users`).send(userData);
-
-	// 	expect(res.status).to.equal(200);
-	// 	expect(res.body).to.be.an("object");
-	// 	expect(res.body.email).to.be.an("string");
-	// });
+	it("should create new user", async () => {
+		const res = await request(app).post(`${url}/users`).send(userData);
+		expect(res.body).to.be.an("object");
+	});
 
 	it("should sign in user", async () => {
 		const res = await request(app).post(`${url}/login`).send(userData);
