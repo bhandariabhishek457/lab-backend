@@ -38,6 +38,15 @@ describe("Vaccine API Test", () => {
 		vaccineId = res.body.id;
 	});
 
+	it("should not create new vaccine with invalid data", async () => {
+		const res = await request(app)
+			.post(`${url}`)
+			.set("Authorization", `Bearer ${token}`)
+			.send("");
+
+		expect(res.status).to.equal(400);
+	});
+
 	it("should get all vaccines", async () => {
 		const res = await request(app)
 			.get(`${url}`)

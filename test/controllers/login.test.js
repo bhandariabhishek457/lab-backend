@@ -9,8 +9,12 @@ const url = "";
 
 const token = process.env.TEST_TOKEN;
 
+const validRefreshToken = process.env.REFRESH_TOKEN_SECRET;
+
+const invalidRefreshTOken = "sadfasdfw342423fsdf";
+
 const userData = {
-	email: "test@gmail.com",
+	email: "vvv@gmail.com",
 	password: "test123",
 	confPassword: "test123",
 };
@@ -19,6 +23,7 @@ const userData = {
  * Tests for register and login'.
  */
 describe("Auth Test", () => {
+	const refreshToken = "";
 	it("should create new user", async () => {
 		const res = await request(app).post(`${url}/users`).send(userData);
 		expect(res.body).to.be.an("object");
@@ -39,5 +44,18 @@ describe("Auth Test", () => {
 		});
 
 		expect(res.body.msg).to.equal("Wrong Password");
+	});
+
+	it("should refresh a token not found", async () => {
+		const res = await request(app).get(`${url}/token`).send({});
+		expect(res.status).to.equal(401);
+	});
+
+	it("should return 403 if refresh token not found ", async () => {
+		const res = await request(app)
+			.get(`${url}/token`)
+			.set("Cookie", ["refreshToken=${invalidRefreshTOken}"])
+			.send({});
+		expect(res.status).to.equal(403);
 	});
 });
