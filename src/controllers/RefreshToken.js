@@ -25,7 +25,7 @@ export const refreshToken = async (req, res) => {
 						expiresIn: "1d",
 					}
 				);
-				res.json({ accessToken });
+				res.json({ accessToken, refreshToken });
 			}
 		);
 	} catch (error) {

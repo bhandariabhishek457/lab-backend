@@ -33,7 +33,7 @@ export const createVaccine = async (props) => {
 };
 
 export const updateVaccine = async (props) => {
-	const vaccine = getVaccineById(props.params.id);
+	const vaccine = await getVaccineById(props.params.id);
 
 	if (vaccine.image) {
 		if (vaccine.image !== props.body.image) {

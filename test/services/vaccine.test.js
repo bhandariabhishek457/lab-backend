@@ -1,5 +1,7 @@
 import * as vaccineService from "../../src/services/vaccineService.js";
 import { expect } from "chai";
+import { image_bytecode } from "../data/image";
+import { image_bytecode_update } from "../data/updateImage";
 
 const vaccineData = {
 	body: {
@@ -7,6 +9,7 @@ const vaccineData = {
 		description: "Vaccine 1 desc",
 		noOfDoges: 2,
 		mandatory: true,
+		image: image_bytecode,
 	},
 };
 
@@ -16,6 +19,7 @@ const vaccineDataUpdate = {
 		description: "Vaccine 1 desc updated",
 		noOfDoges: 3,
 		mandatory: false,
+		image: image_bytecode_update,
 	},
 	params: {
 		id: "",

@@ -56,7 +56,7 @@ export const Login = async (req, res) => {
 			httpOnly: true,
 			maxAge: 24 * 60 * 60 * 1000,
 		});
-		res.json({ accessToken });
+		res.json({ accessToken, refreshToken });
 	} catch (error) {
 		res.status(404).json({ msg: "Email not found" });
 	}

@@ -5,9 +5,12 @@ import dotenv from "dotenv";
 
 import app from "../../index.js";
 
+import * as vaccineController from "../../src/controllers/Vaccine.js";
+
 const url = "/vaccines/";
 
 const token = process.env.TEST_TOKEN;
+const invalidToken = "sdfasdfasdf";
 
 const vaccineData = {
 	name: "Vaccine 1",
@@ -25,6 +28,21 @@ const updateData = {
 
 describe("Vaccine API Test", () => {
 	var vaccineId = "";
+	it("should return 403 for invalid token", async () => {
+		const res = await request(app)
+			.post(`${url}`)
+			.set("Authorization", `Bearer ${invalidToken}`)
+			.send(vaccineData);
+
+		expect(res.status).to.equal(403);
+	});
+
+	it("should return 403 for if ther is no token", async () => {
+		const res = await request(app).post(`${url}`).send(vaccineData);
+
+		expect(res.status).to.equal(401);
+	});
+
 	it("should create new vaccine", async () => {
 		const res = await request(app)
 			.post(`${url}`)
@@ -36,6 +54,13 @@ describe("Vaccine API Test", () => {
 		expect(res.body.name).to.be.an("string");
 		expect(res.body.mandatory).to.be.an("boolean");
 		vaccineId = res.body.id;
+	});
+
+	it("should get vaccine", async () => {
+		const res = await vaccineController.getVaccineById(vaccineId);
+
+		expect(res.name).to.be.an("string");
+		expect(res.mandatory).to.be.an("boolean");
 	});
 
 	it("should not create new vaccine with invalid data", async () => {

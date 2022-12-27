@@ -7,10 +7,6 @@ import app from "../../index.js";
 
 const url = "";
 
-const token = process.env.TEST_TOKEN;
-
-const validRefreshToken = process.env.REFRESH_TOKEN_SECRET;
-
 const invalidRefreshTOken = "sadfasdfw342423fsdf";
 
 const userData = {
@@ -23,7 +19,7 @@ const userData = {
  * Tests for register and login'.
  */
 describe("Auth Test", () => {
-	const refreshToken = "";
+	let refreshToken = "";
 	it("should create new user", async () => {
 		const res = await request(app).post(`${url}/users`).send(userData);
 		expect(res.body).to.be.an("object");
@@ -35,6 +31,7 @@ describe("Auth Test", () => {
 		expect(res.status).to.equal(200);
 		expect(res.body).to.be.an("object");
 		expect(res.body.accessToken).to.be.an("string");
+		refreshToken = res.body.refreshToken;
 	});
 
 	it("should not sign in user with wrong password", async () => {
@@ -54,8 +51,24 @@ describe("Auth Test", () => {
 	it("should return 403 if refresh token not found ", async () => {
 		const res = await request(app)
 			.get(`${url}/token`)
-			.set("Cookie", ["refreshToken=${invalidRefreshTOken}"])
+			.set("Cookie", [`refreshToken=${invalidRefreshTOken}`])
 			.send({});
 		expect(res.status).to.equal(403);
+	});
+
+	it("should return 200 if refresh token is found ", async () => {
+		const res = await request(app)
+			.get(`${url}/token`)
+			.set("Cookie", [`refreshToken=${refreshToken}`])
+			.send({});
+		expect(res.status).to.equal(200);
+	});
+
+	it("should log out the system ", async () => {
+		const res = await request(app)
+			.delete(`${url}/logout`)
+			.set("Cookie", [`refreshToken=${refreshToken}`])
+			.send({});
+		expect(res.status).to.equal(200);
 	});
 });
